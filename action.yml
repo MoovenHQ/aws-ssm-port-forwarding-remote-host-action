@@ -1,0 +1,24 @@
+name: 'AWS SSM Port Forwarding to Remote host Session'
+description: 'Start an SSM Port Forwarding Session to a remote host in a github workflow'
+inputs:
+  bastion:
+    description: 'instance id of the Bastion host'
+    required: true
+  remoteHost:
+    description: 'hostname or IP of the remote host to port forward to'
+    required: true
+  remotePort:
+    description: 'port on the remote host to forward to'
+    required: true
+    default: '8888'
+  localPort:
+    description: 'port on the local host to forward'
+    required: true
+    default: '9999'
+outputs:
+  sessionId:
+    description: 'ssm session id'
+runs:
+  using: 'node16'
+  main: 'index.js'
+  post: 'cleanup.js'
